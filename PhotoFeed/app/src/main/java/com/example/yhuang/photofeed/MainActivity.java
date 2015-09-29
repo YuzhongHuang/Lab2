@@ -139,6 +139,16 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void openSearch() {
+        delete.setVisibility(View.GONE);
+        feed.setVisibility(View.VISIBLE);
+        editText.setVisibility(View.VISIBLE);
+        search.setVisibility(View.VISIBLE);
+        cur_page = 0;
+        items.clear();
+        imageview.setImageResource(0);
+    }
+
     public void openMyFeed() {
         delete.setVisibility(View.VISIBLE);
         feed.setVisibility(View.GONE);
@@ -154,16 +164,6 @@ public class MainActivity extends AppCompatActivity {
         } else {
             new ImageLoadTask(items.get(cur_page), imageview).execute();
         }
-    }
-
-    public void openSearch() {
-        delete.setVisibility(View.GONE);
-        feed.setVisibility(View.VISIBLE);
-        editText.setVisibility(View.VISIBLE);
-        search.setVisibility(View.VISIBLE);
-        cur_page = 0;
-        items.clear();
-        imageview.setImageResource(0);
     }
 
     public void makeRequestWithCallback(String searchText,final ArrayList<String> itemlist) {
