@@ -32,13 +32,14 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<String> items;
     PhotoHelper mDbHelper;
 
-    int cur_page = 0;
+    private int cur_page = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //initiating values to variables
         items = new ArrayList<>();
         editText = (EditText) findViewById(R.id.editText);
         search = (Button) findViewById(R.id.button);
@@ -48,10 +49,11 @@ public class MainActivity extends AppCompatActivity {
         delete = (Button) findViewById(R.id.delete);
         imageview = (ImageView) findViewById(R.id.imageView);
         mDbHelper = new PhotoHelper(this);
-        mDbHelper = new PhotoHelper(this);
 
+        //open the search page
         openSearch();
 
+        //set onClickListeners to the buttons
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -132,13 +134,14 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_search:
                 openSearch();
                 return true;
-            case R.id.action_settings:
-                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
+    /**
+     * the openSearch() method clears the current displaying data and opens the search page
+     */
     public void openSearch() {
         delete.setVisibility(View.GONE);
         feed.setVisibility(View.VISIBLE);
@@ -149,6 +152,9 @@ public class MainActivity extends AppCompatActivity {
         imageview.setImageResource(0);
     }
 
+    /**
+     * the openMyFeed() method clears the current displaying data and opens the feed page
+     */
     public void openMyFeed() {
         delete.setVisibility(View.VISIBLE);
         feed.setVisibility(View.GONE);
@@ -166,6 +172,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * the makeRequestWithCallback() takes a string and send a http request to google; assign the return links to an arraylist
+     */
     public void makeRequestWithCallback(String searchText,final ArrayList<String> itemlist) {
         HttpHandler handler = new HttpHandler(MainActivity.this);
         handler.searchWithCallback(searchText, new SuccessCallback() {
